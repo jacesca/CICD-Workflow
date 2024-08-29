@@ -2,7 +2,7 @@ name: PR
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -16,6 +16,6 @@ jobs:
         with:
           python-version: 3.9
       - name: Run Python script
-          run: |
-            echo hello_world.py
-            python hello_world.py
+        run: |
+          echo hello_world.py
+          python hello_world.py
