@@ -1,6 +1,8 @@
 name: CICD-Test-Context
 
-on: [push]
+on:
+  push:
+    branches: [ "master" ]
 
 env:
   Greeting: Hello
