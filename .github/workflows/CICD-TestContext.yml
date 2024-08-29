@@ -26,3 +26,5 @@ jobs:
       - name: Comment PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Hello world!!!"
