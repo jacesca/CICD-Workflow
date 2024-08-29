@@ -23,9 +23,9 @@ jobs:
           super_secret: ${{ secrets.SuperSecret }}
         run: |
           echo "super_secret: ${{ env.super_secret }}"
-      # - name: Comment PR
-      #   uses: thollander/actions-comment-pull-request@v2
-      #   with:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     message: |
-      #       Hello world! :wave:
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            Hello world! :wave:
