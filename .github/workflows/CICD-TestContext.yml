@@ -23,17 +23,3 @@ jobs:
           super_secret: ${{ secrets.SuperSecret }}
         run: |
           echo "super_secret: ${{ env.super_secret }}"
-  comment:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Adding a comment
-        uses: actions/github-script@v3
-        env:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          github.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: 'Thanks for reporting...'
-          })
