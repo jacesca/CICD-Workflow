@@ -1,0 +1,31 @@
+name: CICD-Test-Context
+
+on: [push]
+
+env:
+  Greeting: Hello
+
+permissions:
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Environment Variables
+        run: |
+          echo "${{ env.Greeting }} from $(whoami)"
+      - name: Test Secret Variables 1
+        run: |
+          echo "super_secret: ${{ secrets.SuperSecret }}"
+      - name: Test Secret Variables 2
+        env:
+          super_secret: ${{ secrets.SuperSecret }}
+        run: |
+          echo "super_secret: ${{ env.super_secret }}"
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          message: |
+            Hello world! :wave:
