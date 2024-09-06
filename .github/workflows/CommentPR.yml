@@ -8,7 +8,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v5
+      - uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -18,3 +18,27 @@ jobs:
               repo: context.repo.repo,
               body: '👋 Thanks for reporting!'
             })
+  ml-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11.9
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+      - uses: iterative/setup-cml@v3
+      - name: Train and Test model
+        run: |
+          python ml-example/train_and_test.py
+      - name: Write CML report
+        run: |
+          cat ml-example/result.txt > report.md
+          echo "![Confusion Matrix](ml-example/confusion-matrix.png)" >> report.md
+          cml comment create report.md
+        env:
+          REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    
