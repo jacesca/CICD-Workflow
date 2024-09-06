@@ -21,11 +21,18 @@ jobs:
   ml-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v4
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.9
+      - name: Install Dependencies
+        run: |
+          pip install -r ./requirements.txt
       - uses: iterative/setup-cml@v1
       - name: Train and Test model
         run: |
-          pip install -r ./requirements.txt
           python train.py
       - name: Write CML report
         run: |
