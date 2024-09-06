@@ -33,7 +33,7 @@ jobs:
       - uses: iterative/setup-cml@v1
       - name: Train and Test model
         run: |
-          python train.py
+          python ml-example/train.py
       - name: Write CML report
         run: |
           cat ml-example/result.txt > report.md
