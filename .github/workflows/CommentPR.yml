@@ -18,3 +18,18 @@ jobs:
               repo: context.repo.repo,
               body: '👋 Thanks for reporting!'
             })
+  ml-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: iterative/setup-cml@v1
+      - name: Train and Test model
+        run: |
+          pip install -r requirements.txt
+          python train.py
+      - name: Write CML report
+        run: |
+          cat ml-example/result.txt > report.md
+          echo "![Confusion Matrix](ml-example/confusion-matrix.png)" >> report.md
+          cml comment create report.md
+        env:
+          REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
