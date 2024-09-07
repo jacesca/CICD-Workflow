@@ -1,4 +1,4 @@
-name: comments-ml-example2
+name: comments-ml-example3
 
 on:
   pull_request:
@@ -43,6 +43,6 @@ jobs:
           echo "# ML Example 3" > report3.md
           dvc metrics show --md >> report3.md
           echo "### Metrics comparison with master branch"
-          dvc metrics diff --md >> report3.md
+          dvc metrics diff --all --md >> report3.md
           echo "![Confusion Matrix Plot](ml-example3/evaluation-result/confusion_matrix.png)" >> report3.md
           cml comment create report3.md
