@@ -1,0 +1,48 @@
+name: comments-ml-example3
+
+on:
+  pull_request:
+    branches: ["master", "myfeature"]
+
+permissions: write-all
+
+jobs:
+  train_and_test_model_ml2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11.9
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Train and test model
+        run: |
+          python ml-example2/preprocess_data.py
+          python ml-example2/train.py
+
+      - name: Setup DVC
+        uses: iterative/setup-dvc@v1
+
+      - name: Run DVC pipeline
+        run: dvc repro
+        
+      - name: Setup CML GitHub Actions
+        uses: iterative/setup-cml@v3
+
+      - name: Write CML report
+        env:
+          REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          echo "# ML Example 3" > report3.md
+          dvc metrics show --md >> report3.md
+          echo "### Metrics comparison with master branch"
+          dvc metrics diff --all --md >> report3.md
+          echo "![Confusion Matrix Plot](ml-example3/evaluation-result/confusion_matrix.png)" >> report3.md
+          cml comment create report3.md
