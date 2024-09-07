@@ -42,7 +42,7 @@ jobs:
         run: |
           echo "# ML Example 3" > report3.md
           dvc metrics show --md >> report3.md
-          echo "### Metrics comparison with master branch"
+          echo "### Metrics comparison with master branch" >> report3.md
           dvc metrics diff --all --md >> report3.md
           echo "![Confusion Matrix Plot](ml-example3/evaluation-result/confusion_matrix.png)" >> report3.md
           cml comment create report3.md
