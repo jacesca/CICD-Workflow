@@ -36,7 +36,8 @@ jobs:
           python ml-example/train_and_test.py
       - name: Write CML report
         run: |
-          cat ml-example/result.txt > report.md
+          echo "# ML Example 1" > report.md
+          cat ml-example/result.txt >> report.md
           echo "![Confusion Matrix](ml-example/confusion-matrix.png)" >> report.md
           cml comment create report.md
         env:

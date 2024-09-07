@@ -34,6 +34,7 @@ jobs:
         env:
           REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          cat ml-example2/evaluation-result/metrics.json > model_eval_report.md
+          echo "# ML Example 2" > model_eval_report.md
+          cat ml-example2/evaluation-result/metrics.json >> model_eval_report.md
           echo "![Confusion Matrix Plot](ml-example2/evaluation-result/confusion_matrix.png)" >> model_eval_report.md
           cml comment create model_eval_report.md
