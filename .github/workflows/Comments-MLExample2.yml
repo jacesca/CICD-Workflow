@@ -1,0 +1,39 @@
+name: comments-ml-example2
+
+on:
+  pull-request:
+    branches: ["master", "myfeature"]
+
+permissions: write-all
+
+jobs:
+  train_and_test_model_ml2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11.9
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Train and test model
+        run: |
+          python ml-example2/preprocess_data.py
+          python ml-example2/train.py
+
+      - name: Setup CML GitHub Actions
+        uses: iterative/setup-cml@v3
+
+      - name: Write CML report
+        env:
+          REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          cat ml-example2/evaluation-result/metrics.json > model_eval_report.md
+          echo "![Confusion Matrix Plot](l-example2/evaluation-result/confusion_matrix.png)" >> model_eval_report.md
+          cml comment create model_eval_report.md
