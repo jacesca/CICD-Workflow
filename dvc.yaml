@@ -1,0 +1,20 @@
+stages:
+  preprocess:
+    cmd: python ml-example2/preprocess_data.py
+    deps:
+    - ml-example2/preprocess_data.py
+    - ml-example2/raw-data/weather.csv
+    - ml-example2/utils_and_constants.py
+    outs:
+    - ml-example2/processed-data/weather.csv
+  train:
+    cmd: python ml-example2/train.py
+    deps:
+    - ml-example2/metrics_and_plots.py
+    - ml-example2/model.py
+    - ml-example2/processed-data/weather.csv
+    - ml-example2/train.py
+    - ml-example2/utils_and_constants.py
+    outs:
+    - ml-example2/evaluation-result/confusion_matrix.png
+    - ml-example2/evaluation-result/metrics.json

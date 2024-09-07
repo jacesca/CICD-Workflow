@@ -1,0 +1,54 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python ml-example2/preprocess_data.py
+    deps:
+    - path: ml-example2/preprocess_data.py
+      hash: md5
+      md5: 765cc24c46c13a6c8d498e8d59904302
+      size: 3553
+    - path: ml-example2/raw-data/weather.csv
+      hash: md5
+      md5: 8b80f6484630c3b5b0dacaabc37afaf0
+      size: 2726131
+    - path: ml-example2/utils_and_constants.py
+      hash: md5
+      md5: 7f58a9d017ebc13db31e319e117da969
+      size: 613
+    outs:
+    - path: ml-example2/processed-data/weather.csv
+      hash: md5
+      md5: 5a799ba072f8399633fbd5b922d7c499
+      size: 10526986
+  train:
+    cmd: python ml-example2/train.py
+    deps:
+    - path: ml-example2/metrics_and_plots.py
+      hash: md5
+      md5: b9f8715d5367bb7d8dbc7c5fca4f1450
+      size: 540
+    - path: ml-example2/model.py
+      hash: md5
+      md5: ac9a7b4032eb40d74ab00d90ea7e9c0a
+      size: 959
+    - path: ml-example2/processed-data/weather.csv
+      hash: md5
+      md5: 5a799ba072f8399633fbd5b922d7c499
+      size: 10526986
+    - path: ml-example2/train.py
+      hash: md5
+      md5: db521c9267ee2c3c7391ab36c105dcaf
+      size: 1191
+    - path: ml-example2/utils_and_constants.py
+      hash: md5
+      md5: 7f58a9d017ebc13db31e319e117da969
+      size: 613
+    outs:
+    - path: ml-example2/evaluation-result/confusion_matrix.png
+      hash: md5
+      md5: dcef62662b1736bc960c55d85071cbda
+      size: 15337
+    - path: ml-example2/evaluation-result/metrics.json
+      hash: md5
+      md5: ec916b9800512aebcd3824504c316d48
+      size: 77
