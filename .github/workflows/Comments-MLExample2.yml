@@ -1,7 +1,7 @@
 name: comments-ml-example2
 
 on:
-  pull-request:
+  pull_request:
     branches: ["master", "myfeature"]
 
 permissions: write-all
