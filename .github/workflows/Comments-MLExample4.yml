@@ -24,7 +24,7 @@ jobs:
 
       - name: Train and test model
         run: |
-          python ml-example4/preprocess_data.py
+          python ml-example4/preprocess_dataset.py
           python ml-example4/hp_tuning.py
           python ml-example4/train.py
 
