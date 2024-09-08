@@ -1,13 +1,13 @@
-name: comments-ml-example3
+name: comments-ml-example4
 
 on:
   pull_request:
-    branches: ["master", "myfeature"]
+    branches: ["**"]
 
 permissions: write-all
 
 jobs:
-  train_and_test_model_ml3:
+  train_and_test_model_ml4:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,18 +24,19 @@ jobs:
 
       - name: Train and test model
         run: |
-          python ml-example3/preprocess_data.py
-          python ml-example3/train.py
+          python ml-example4/preprocess_data.py
+          python ml-example4/hp_tuning.py
+          python ml-example4/train.py
 
       - name: Create DVC pipeline
         run: |
-          python ml-example3/dvc_pipeline_creation.py
+          python ml-example4/dvc_pipeline_creation.py
 
       - name: Setup DVC
         uses: iterative/setup-dvc@v1
 
       - name: Run DVC pipeline
-        run: dvc repro
+        run: dvc repro --force
         
       - name: Setup CML GitHub Actions
         uses: iterative/setup-cml@v3
@@ -44,9 +45,8 @@ jobs:
         env:
           REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          echo "# ML Example 3" > report3.md
-          dvc metrics show --md >> report3.md
-          echo "### Metrics comparison with master branch" >> report3.md
-          dvc metrics diff --all --md >> report3.md
-          echo "![Confusion Matrix Plot](ml-example3/evaluation-result/confusion_matrix.png)" >> report3.md
-          cml comment create report3.md
+          cat ml-example4/evaluation-result/hp_tuning_results.md >> report4.md
+          echo "### Metrics comparison with master branch" >> report4.md
+          dvc metrics diff --all --md >> report4.md
+          echo "![Confusion Matrix Plot](ml-example4/evaluation-result/confusion_matrix.png)" >> report4.md
+          cml comment create report4.md

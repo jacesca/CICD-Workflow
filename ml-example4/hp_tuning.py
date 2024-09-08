@@ -33,6 +33,7 @@ def main():
 
     markdown_table = get_hp_tuning_results(grid_search)
     with open(MD_TUNNING_RESULTS, "w") as markdown_file:
+        markdown_file.write("# ML Example 4\n\n")
         markdown_file.write("### Tunning Results\n\n")
         markdown_file.write(markdown_table)
         markdown_file.write('\n\n')

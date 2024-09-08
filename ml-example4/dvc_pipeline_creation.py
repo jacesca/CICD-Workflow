@@ -1,4 +1,5 @@
-stages:
+# Prepare the yaml file
+yml_str = """stages:
   preprocess:
     cmd: python ml-example4/preprocess_dataset.py
     deps:
@@ -42,3 +43,6 @@ stages:
           y_label: 'True label'
           title: Confusion matrix
           cache: false
+"""
+with open("dvc.yaml", "w") as f:
+    f.write(yml_str)
