@@ -41,7 +41,7 @@ jobs:
           REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           echo "# ML Example 3 (V.2)" > report3-2.md
-          dvc metrics show --md >> report3.md
+          dvc metrics show --md >> report3-2.md
           echo "### Metrics comparison with master branch" >> report3-2.md
           git fetch --prune
           dvc metrics diff --md --all >> report3-2.md
