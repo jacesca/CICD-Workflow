@@ -3,6 +3,10 @@ stages:
   preprocess:
     cmd: python ml-example3/preprocess_data.py
     deps:
+    - path: ml-example3/.env
+      hash: md5
+      md5: 60a9d2a6092415653fdd3534a8ad8a7a
+      size: 20
     - path: ml-example3/preprocess_data.py
       hash: md5
       md5: fc58438b2e0c3a5b107d46b27d536a48
@@ -13,8 +17,8 @@ stages:
       size: 2726131
     - path: ml-example3/utils_and_constants.py
       hash: md5
-      md5: 252d3c4eb72c8ecff3350901a839670b
-      size: 752
+      md5: af6e627d7790f5534e07500189b78bc7
+      size: 869
     outs:
     - path: ml-example3/processed-data/weather.csv
       hash: md5
@@ -23,6 +27,10 @@ stages:
   train:
     cmd: python ml-example3/train.py
     deps:
+    - path: ml-example3/.env
+      hash: md5
+      md5: 60a9d2a6092415653fdd3534a8ad8a7a
+      size: 20
     - path: ml-example3/metrics_and_plots.py
       hash: md5
       md5: 779461acb4d33cd9ed9dd985abee782c
@@ -41,8 +49,8 @@ stages:
       size: 1196
     - path: ml-example3/utils_and_constants.py
       hash: md5
-      md5: 252d3c4eb72c8ecff3350901a839670b
-      size: 752
+      md5: af6e627d7790f5534e07500189b78bc7
+      size: 869
     outs:
     - path: ml-example3/evaluation-result/confusion_matrix.png
       hash: md5

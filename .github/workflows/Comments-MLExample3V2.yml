@@ -1,4 +1,4 @@
-name: comments-ml-example3
+name: comments-ml-example3-v2
 
 on:
   pull_request:
@@ -40,9 +40,10 @@ jobs:
         env:
           REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          echo "# ML Example 3" > report3.md
-          dvc metrics show --md >> report3.md
-          echo "### Metrics comparison with master branch" >> report3.md
-          dvc metrics diff --all --md >> report3.md
-          echo "![Confusion Matrix Plot](ml-example3/evaluation-result/confusion_matrix.png)" >> report3.md
-          cml comment create report3.md
+          echo "# ML Example 3 (V.2)" > report3-2.md
+          dvc metrics show --md >> report3-2.md
+          echo "### Metrics comparison with master branch" >> report3-2.md
+          git fetch --prune
+          dvc metrics diff --md --all >> report3-2.md
+          echo "![Confusion Matrix Plot](ml-example3/evaluation-result/confusion_matrix.png)" >> report3-2.md
+          cml comment create report3-2.md
