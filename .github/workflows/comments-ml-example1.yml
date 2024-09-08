@@ -1,0 +1,44 @@
+on:
+  pull_request:
+    branches:
+      - master
+      - myfeature
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
+  ml-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11.9
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+      - uses: iterative/setup-cml@v3
+      - name: Train and Test model
+        run: |
+          python ml-example/train_and_test.py
+      - name: Write CML report
+        run: |
+          echo "# ML Example 1" > report1.md
+          cat ml-example/result.txt >> report1.md
+          echo "![Confusion Matrix](ml-example/confusion-matrix.png)" >> report1.md
+          cml comment create report1.md
+        env:
+          REPO_TOKEN: ${{secrets.GITHUB_TOKEN}}
