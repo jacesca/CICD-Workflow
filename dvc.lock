@@ -5,7 +5,7 @@ stages:
     deps:
     - path: ml-example3/.env
       hash: md5
-      md5: 372204290f02254b83dc4989b5cb2d3b
+      md5: 60a9d2a6092415653fdd3534a8ad8a7a
       size: 20
     - path: ml-example3/preprocess_data.py
       hash: md5
@@ -29,7 +29,7 @@ stages:
     deps:
     - path: ml-example3/.env
       hash: md5
-      md5: 372204290f02254b83dc4989b5cb2d3b
+      md5: 60a9d2a6092415653fdd3534a8ad8a7a
       size: 20
     - path: ml-example3/metrics_and_plots.py
       hash: md5
@@ -54,13 +54,13 @@ stages:
     outs:
     - path: ml-example3/evaluation-result/confusion_matrix.png
       hash: md5
-      md5: 6559cb43d1058b970755052b7a88e16f
-      size: 14996
+      md5: dcef62662b1736bc960c55d85071cbda
+      size: 15337
     - path: ml-example3/evaluation-result/metrics.json
       hash: md5
-      md5: 8f4e6b3175d1ff75a95ee1a85e8915fb
-      size: 76
+      md5: ec916b9800512aebcd3824504c316d48
+      size: 77
     - path: ml-example3/evaluation-result/predictions.csv
       hash: md5
-      md5: 8ac2269f6c54d799b4c2ff5e109f9342
+      md5: b9c8698025c7c9ac7be5d33faf56624b
       size: 31278
