@@ -1,12 +1,19 @@
 import shutil
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+load_dotenv("ml-example3/.env")
+
+
+RFC_FOREST_DEPTH = int(os.getenv('RFC_FOREST_DEPTH'))
 
 DATASET_TYPES = ["test", "train"]
 DROP_COLNAMES = ["Date"]
 TARGET_COLUMN = "RainTomorrow"
 RAW_DATASET = "ml-example3/raw-data/weather.csv"
 PROCESSED_DATASET = "ml-example3/processed-data/weather.csv"
-RFC_FOREST_DEPTH = 2
 
 PNG_CONFUSION_IMAGE = "ml-example3/evaluation-result/confusion_matrix.png"
 JSON_METRICS = "ml-example3/evaluation-result/metrics.json"
