@@ -1,6 +1,13 @@
 name: comments-ml-example4
 
 on:
+  # Only trigger, when `comments-ml-example3` and `comments-ml-example3-v2` workflows succeeded
+  workflow_run:
+    workflows: 
+      - comments-ml-example3
+      - comments-ml-example3-v2
+    types:
+      - completed
   pull_request:
     branches: ["**"]
 
