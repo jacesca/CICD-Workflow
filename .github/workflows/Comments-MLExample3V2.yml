@@ -1,6 +1,11 @@
 name: comments-ml-example3-v2
 
 on:
+  # Only trigger, when `comments-ml-example3` workflow succeeded
+  workflow_run:
+    workflows: ["comments-ml-example3"]
+    types:
+      - completed
   pull_request:
     branches: ["master", "myfeature"]
 
@@ -24,8 +29,12 @@ jobs:
 
       - name: Train and test model
         run: |
-          python ml-example2/preprocess_data.py
-          python ml-example2/train.py
+          python ml-example3/preprocess_data.py
+          python ml-example3/train.py
+
+      - name: Create DVC pipeline
+        run: |
+          python ml-example3/dvc_pipeline_creation.py
 
       - name: Setup DVC
         uses: iterative/setup-dvc@v1

@@ -1,66 +1,94 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python ml-example3/preprocess_data.py
+    cmd: python ml-example4/preprocess_dataset.py
     deps:
-    - path: ml-example3/.env
+    - path: ml-example4/.env
       hash: md5
-      md5: 60a9d2a6092415653fdd3534a8ad8a7a
-      size: 20
-    - path: ml-example3/preprocess_data.py
+      md5: 90ceccf6f1c0c4f6fe6168b6bf07e03f
+      size: 18
+    - path: ml-example4/preprocess_dataset.py
       hash: md5
-      md5: fc58438b2e0c3a5b107d46b27d536a48
+      md5: b5fc2ed861e02958be209541b97fccb0
       size: 3545
-    - path: ml-example3/raw-data/weather.csv
+    - path: ml-example4/raw-data/weather.csv
       hash: md5
       md5: 8b80f6484630c3b5b0dacaabc37afaf0
       size: 2726131
-    - path: ml-example3/utils_and_constants.py
+    - path: ml-example4/utils_and_constants.py
       hash: md5
-      md5: af6e627d7790f5534e07500189b78bc7
-      size: 869
+      md5: af4c4b1fd5da4f6361b81133a6833efc
+      size: 2275
     outs:
-    - path: ml-example3/processed-data/weather.csv
+    - path: ml-example4/processed-data/weather.csv
       hash: md5
       md5: 5a799ba072f8399633fbd5b922d7c499
       size: 10526986
   train:
-    cmd: python ml-example3/train.py
+    cmd: python ml-example4/train.py
     deps:
-    - path: ml-example3/.env
+    - path: ml-example4/.env
       hash: md5
-      md5: 60a9d2a6092415653fdd3534a8ad8a7a
-      size: 20
-    - path: ml-example3/metrics_and_plots.py
+      md5: 90ceccf6f1c0c4f6fe6168b6bf07e03f
+      size: 18
+    - path: ml-example4/evaluation-result/rfc_best_params.json
       hash: md5
-      md5: 779461acb4d33cd9ed9dd985abee782c
-      size: 1342
-    - path: ml-example3/model.py
+      md5: f02ec8024ed5955e100c8fefbcf7a41b
+      size: 58
+    - path: ml-example4/metrics_and_plots.py
       hash: md5
-      md5: 7ce64475d4ce129379c1a673bbe90a5a
-      size: 1132
-    - path: ml-example3/processed-data/weather.csv
+      md5: f3505759fa1a0dd6ae75d871852310e3
+      size: 1295
+    - path: ml-example4/model.py
+      hash: md5
+      md5: ae162509c46c92e8933475072ee78017
+      size: 1143
+    - path: ml-example4/processed-data/weather.csv
       hash: md5
       md5: 5a799ba072f8399633fbd5b922d7c499
       size: 10526986
-    - path: ml-example3/train.py
+    - path: ml-example4/train.py
       hash: md5
-      md5: d5c486f80a46087cf190f7a7b4d5f9aa
-      size: 1196
-    - path: ml-example3/utils_and_constants.py
+      md5: c6c714b74b9592473759ca5e25c8aeec
+      size: 1349
+    - path: ml-example4/utils_and_constants.py
       hash: md5
-      md5: af6e627d7790f5534e07500189b78bc7
-      size: 869
+      md5: af4c4b1fd5da4f6361b81133a6833efc
+      size: 2275
     outs:
-    - path: ml-example3/evaluation-result/confusion_matrix.png
+    - path: ml-example4/evaluation-result/confusion_matrix.png
       hash: md5
-      md5: dcef62662b1736bc960c55d85071cbda
-      size: 15337
-    - path: ml-example3/evaluation-result/metrics.json
+      md5: dd466d0b30caec921310c4bdbffc692a
+      size: 14987
+    - path: ml-example4/evaluation-result/metrics.json
       hash: md5
-      md5: ec916b9800512aebcd3824504c316d48
-      size: 77
-    - path: ml-example3/evaluation-result/predictions.csv
+      md5: 4ea2f49411478deeb4c30942b9205751
+      size: 76
+    - path: ml-example4/evaluation-result/predictions.csv
       hash: md5
-      md5: b9c8698025c7c9ac7be5d33faf56624b
+      md5: 2cb0ecb2ac3d7a8f3c0adbd61575ee3e
       size: 31278
+  hp_tune:
+    cmd: python ml-example4/hp_tuning.py
+    deps:
+    - path: ml-example4/config/hp_config.json
+      hash: md5
+      md5: e681bab4209ff957f7d2ebec56690dab
+      size: 100
+    - path: ml-example4/hp_tuning.py
+      hash: md5
+      md5: 7111bae0146e4b48fdffb230f96720d5
+      size: 1932
+    - path: ml-example4/processed-data/weather.csv
+      hash: md5
+      md5: 5a799ba072f8399633fbd5b922d7c499
+      size: 10526986
+    outs:
+    - path: ml-example4/evaluation-result/hp_tuning_results.md
+      hash: md5
+      md5: 40b57f8e9728e1679071521740bbb4ba
+      size: 5371
+    - path: ml-example4/evaluation-result/rfc_best_params.json
+      hash: md5
+      md5: f02ec8024ed5955e100c8fefbcf7a41b
+      size: 58

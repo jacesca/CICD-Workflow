@@ -24,8 +24,12 @@ jobs:
 
       - name: Train and test model
         run: |
-          python ml-example2/preprocess_data.py
-          python ml-example2/train.py
+          python ml-example3/preprocess_data.py
+          python ml-example3/train.py
+
+      - name: Create DVC pipeline
+        run: |
+          python ml-example3/dvc_pipeline_creation.py
 
       - name: Setup DVC
         uses: iterative/setup-dvc@v1
